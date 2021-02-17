@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import article_list,student_list,article_detail
+from .views import article_list,student_list,article_detail,ArticleAPIView,ArticleDetailsAPIView,StudentDetailsAPIView
 
 urlpatterns = [
     path('article/', article_list),
     path('student/', student_list),
     path('detail/<int:pk>/', article_detail),
+    path('articleAPIView/',ArticleAPIView.as_view()), #as_view() since ArticleAPIView is a classbased apiview
+    path('articledetailsAPIView/<int:id>/',ArticleDetailsAPIView.as_view()),
+    path('studentdetailsAPIView/',StudentDetailsAPIView.as_view())
 ]
