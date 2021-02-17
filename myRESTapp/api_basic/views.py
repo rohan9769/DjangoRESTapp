@@ -12,6 +12,27 @@ from rest_framework import status
 
 from rest_framework.views import APIView
 
+from rest_framework import generics
+from rest_framework import mixins
+
+
+#Generics
+class GenericAPIView(generics.GenericAPIView,mixins.ListModelMixin,mixins.CreateModelMixin,mixins.UpdateModelMixin):
+    serializer_class = ArticleSerializer
+    queryset = Article.objects.all()
+
+    lookup_field = 'id'
+
+    def get(self,request):
+        return self.list(request)
+    
+    def post(self,request):
+        return self.create(request)
+    
+    def put(self,request,id=None):
+        return self.update(request,id)
+
+
 #classbased api_views
 class ArticleAPIView(APIView):
     def get(self,request):
@@ -63,18 +84,6 @@ class StudentDetailsAPIView(APIView):
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
-
-
-
-        
-
-
-
-
-
-
-
 
 
 # Create your views here.
