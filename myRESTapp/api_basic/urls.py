@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from .views import article_list,student_list
+from .views import article_list,student_list,article_detail
 
 urlpatterns = [
     path('article/', article_list),
     path('student/', student_list),
+    path('detail/<int:pk>/', article_detail),
 ]
